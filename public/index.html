@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <meta content="telephone=no" name="format-detection">
+    <title></title>
+    <script>
+      (function() {
+        var flexible = {};
+        var baseNum = 16;
+        var designWidth = 750;
+        flexible.dpr = window.devicePixelRatio || 1;
+        flexible.changeRem = function() {
+          var width = document.documentElement.getBoundingClientRect().width;
+          flexible.ratio = width / designWidth * 2;
+          flexible.rootFontSize = width / designWidth * 2 * baseNum;
+          if (flexible.rootFontSize > 16) {
+            flexible.rootFontSize = 16;
+          }
+          document.documentElement.style.fontSize = flexible.rootFontSize + 'px';
+        };
+        flexible.changeRem();
+        var t;
+        window.addEventListener('resize', function() {
+          clearTimeout(t);
+          t = setTimeout(flexible.changeRem, 300);
+        }, false);
+        window.addEventListener('pageshow', function(e) {
+          if (e.persisted) {
+            clearTimeout(t);
+            t = setTimeout(flexible.changeRem, 300);
+          }
+        }, false);
+        flexible.px2rem = function(px) {
+          return parseInt(px, 10) / baseNum / 2;
+        };
+        flexible.rem2px = function(rem) {
+          return parseFloat((rem * baseNum * flexible.ratio).toFixed(6), 10);
+        };
+        window.flexible = flexible;
+      }());
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
