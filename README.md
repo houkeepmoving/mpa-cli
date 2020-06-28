@@ -49,5 +49,3 @@ npm run build
 * main.js是每个页面的入口文件，必须有,pages中的文件名就是生成的页面名字;
 
 * public中index.html是默认html模版文件
-
-* 责任人：景朝阳、侯坦、苑雪娇、张明、梅联盟
